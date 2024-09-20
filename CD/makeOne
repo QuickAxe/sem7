@@ -1,0 +1,8 @@
+one: lex.yy.c
+	gcc -o one -DECHO lex.yy.c
+
+lex.yy.c: one.l
+	lex one.l
+
+clean: 
+	rm -f one *.o lex.yy.c
