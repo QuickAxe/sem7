@@ -28,9 +28,9 @@ int main()
 
         float activationValue = activation(net);
 
-        // // if the value is the same as the desired value, skip this step
-        // if(d[i] == activationValue)
-        //     continue;
+        // if the value is the same as the desired value, skip this step
+        if (d[i] == activationValue)
+            continue;
 
         int r = d[i] - activationValue;
 
