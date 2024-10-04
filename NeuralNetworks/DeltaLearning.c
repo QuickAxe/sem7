@@ -1,9 +1,16 @@
 #include <stdio.h>
+#include <math.h>
 
-float activation(int n)
+float activation(float n, float lambda)
 {
-    // using the 'sign' function
-    return (n >= 0) ? 1.0 : -1.0;
+    // using bipolar sigmoid in this case
+    return 2 / (1 + exp(-1.0 * lambda * n)) - 1;
+}
+
+float activationDerivative(float output)
+{
+    // the derivative of the bipolar sigmoid function
+    return 0.5 * (1 - pow(output, 2));
 }
 
 int main()
@@ -14,26 +21,26 @@ int main()
                      {-1, 1, 0.5, -1}};
 
     float w[] = {1, -1, 0, 0.5};
-
     float d[] = {-1, -1, 1};
 
     float c = 0.1;
+    float alpha = 1;
 
     // training loop
-
     for (int i = 0; i < 3; i++)
     {
         float net = 0;
         for (int j = 0; j < 4; j++)
             net += w[j] * x[i][j];
 
-        float activationValue = activation(net);
+        float activationValue = activation(net, alpha);
+        printf("%f:%f\n", net, activationValue);
 
         // if the value is the same as the desired value, skip this step
         if (d[i] == activationValue)
             continue;
 
-        int r = d[i] - activationValue;
+        float r = (d[i] - activationValue) * activationDerivative(activationValue);
 
         // update weights
         for (int j = 0; j < 4; j++)

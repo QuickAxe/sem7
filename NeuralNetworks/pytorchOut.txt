@@ -1,0 +1,11 @@
+Epoch [10/100], Loss: 0.5309
+Epoch [20/100], Loss: 0.5148
+Epoch [30/100], Loss: 0.4965
+Epoch [40/100], Loss: 0.4748
+Epoch [50/100], Loss: 0.4498
+Epoch [60/100], Loss: 0.4224
+Epoch [70/100], Loss: 0.3933
+Epoch [80/100], Loss: 0.3635
+Epoch [90/100], Loss: 0.3388
+Epoch [100/100], Loss: 0.3155
+Predictions: [0 0 0 1], Actual: [0 0 0 1]
