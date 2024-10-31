@@ -2,7 +2,7 @@
 #include<stdlib.h>
 #include<stdio.h>
 int yylex(void);
-void yyerror(char*, char*);
+void yyerror(char*);
 %}
 
 %token ID 
@@ -20,9 +20,9 @@ V : ID ';' {}
 
 %% 
 
-void yyerror(char* s, char *errorChar)
+void yyerror(char *errorChar)
 {
-    fprint(stderr, "%s %s", s, errorChar);
+    fprintf(stderr, "Error, invalid chars: %s", errorChar);
 }
 
 int main()

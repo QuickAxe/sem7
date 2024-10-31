@@ -1,0 +1,15 @@
+# windows specific make file :( 
+# no cross compatibilty sadly
+all : build clean
+
+build : y.tab.c lex.yy.c
+	gcc lex.yy.c y.tab.c -o $(NAME) && .\$(NAME)
+
+lex.yy.c : $(NAME).l
+	flex $(NAME).l
+
+y.tab.c : $(NAME).y
+	bison -dyt $(NAME).y 
+
+clean :
+	del -f y.tab.* lex.yy.c $(NAME)

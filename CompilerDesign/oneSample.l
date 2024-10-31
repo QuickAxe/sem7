@@ -1,4 +1,8 @@
-%%
+%{
+    #include "y.tab.h"
+    void yyerror(char*);
+
+%}
 
 alpha [a-zA-Z_]
 digit [0-9]
@@ -13,7 +17,7 @@ digit [0-9]
 [,;\n] return *yytext;
 [ \t] ;
 
-. {yyerror("invalid character: ", *yytext); exit(0);}
+. {yyerror(yytext);}
 
 %%
 
