@@ -1,1 +1,3 @@
 *.DS_Store
+NeuralNetworks/myenv/*
+NeuralNetworks/Dataset/*
