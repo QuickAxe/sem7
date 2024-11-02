@@ -12,6 +12,7 @@ void print_outputs(int layer, int nodes, float matrix[layer][nodes])
 {
     for (int i = 1; i < layer; i++)
     {
+        printf("Layer %d: ", i);
         for (int j = 0; j < nodes && i + j < 3; j++)
         {
             printf("%f ", matrix[i][j]);
@@ -25,6 +26,7 @@ void print_weights(int layer, int nodes, int prev_nodes, float matrix[layer][nod
 {
     for (int i = 1; i < layer; i++)
     {
+        printf("Layer %d: ", i);
         for (int j = 0; j < nodes; j++)
         {
             for (int k = 0; k < prev_nodes && i + j < 3; k++)
@@ -54,7 +56,7 @@ void forward_pass(float weights[3][2][2], float outputs[3][2])
     }
 }
 
-void backpropagation(float weights[3][2][2], float outputs[3][2], float error, float lr)
+void backpropagation(float weights[3][2][2], float outputs[3][2], float diff, float lr)
 {
     // gradients[layer_num][current_node_num]
     float gradients[3][2] = {
@@ -70,7 +72,7 @@ void backpropagation(float weights[3][2][2], float outputs[3][2], float error, f
             if (layer == 2 && gradients[layer][node] != -1)
             {
                 // grad = output * (1 - output) * (teacher - output)
-                gradients[layer][node] = outputs[layer][node] * (1 - outputs[layer][node]) * error;
+                gradients[layer][node] = outputs[layer][node] * (1 - outputs[layer][node]) * diff;
             }
             else if (layer < 2)
             {
@@ -125,13 +127,15 @@ int main()
         print_outputs(3, 2, outputs);
 
         // Calculate error and continue with backprop if desired
-        float error = target_output - outputs[2][0];
+        float diff = target_output - outputs[2][0];
+        float error = 0.5 * pow(diff, 2);
+        printf("Error: %f\n\n", error);
 
-        if (fabs(error) < 0.1)
+        if (error < 0.01)
             break;
 
         // Perform backpropagation
-        backpropagation(weights, outputs, error, lr);
+        backpropagation(weights, outputs, diff, lr);
 
         printf("Weight Matrix for Backward Pass %d:\n", i);
         print_weights(3, 2, 2, weights);
