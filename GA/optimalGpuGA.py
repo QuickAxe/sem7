@@ -1,5 +1,7 @@
-#! deprecated code, it has its own repo now, at:
-#! https://github.com/QuickAxe/Ga-Gpu
+# ====================================================
+#!  deprecated code, it has its own repo now, at:
+#!! https://github.com/QuickAxe/Ga-Gpu
+# ====================================================
 import random
 
 
