@@ -34,13 +34,18 @@ int main()
             net += w[j] * x[i][j];
 
         float activationValue = activation(net, alpha);
-        printf("%f:%f\n", net, activationValue);
+        // printf("%f:%f\n", net, activationValue);
 
         // if the value is the same as the desired value, skip this step
         if (d[i] == activationValue)
+        {
+            printf("\nActivation value matches output, skipping step\n");
             continue;
+        }
 
+        printf("Activation Value: %f\n", activationValue);
         float r = (d[i] - activationValue) * activationDerivative(activationValue);
+        printf("r Value: %f\n", r);
 
         // update weights
         for (int j = 0; j < 4; j++)
@@ -52,6 +57,7 @@ int main()
     }
 
     // output final weights:
+    printf("Final weights: \n");
     for (int j = 0; j < 4; j++)
-        printf("\nw[%d] = %f\n", j, w[j]);
+        printf("w[%d] = %f\n", j, w[j]);
 }

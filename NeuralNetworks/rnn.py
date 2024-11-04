@@ -38,7 +38,7 @@ hidden_size = 256
 num_classes = 10
 learning_rate = 0.001
 batch_size = 64
-num_epochs = 2
+num_epochs = 15
 
 # Load the dataset
 train_dataset = datasets.MNIST(

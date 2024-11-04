@@ -56,7 +56,7 @@ in_channel = 1
 num_classes = 10
 learning_rate = 0.001
 batch_size = 64
-num_epochs = 5
+num_epochs = 20
 
 # Initialize Network
 model = CNN().to(device)

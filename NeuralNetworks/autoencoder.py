@@ -21,6 +21,8 @@ loader = torch.utils.data.DataLoader(dataset=dataset,
 
 # Creating a PyTorch class
 # 28*28 ==> 18 ==> 28*28
+
+
 class AE(torch.nn.Module):
     def __init__(self):
         super().__init__()
@@ -71,33 +73,36 @@ optimizer = torch.optim.Adam(model.parameters(),
                              lr=1e-1,
                              weight_decay=1e-8)
 
-# choose some small value for this experiment, but dont expect good results 
-epochs = 3
+# choose some small value for this experiment, but dont expect good results
+epochs = 10
 outputs = []
 losses = []
 for epoch in tqdm(range(epochs)):
+    avgLoss = 0
+    n = 0
     for (image, _) in loader:
-        
-           
+
         # Reshaping the image to (-1, 784)
         image = image.reshape(-1, 28*28)
-        
+
         # Output of Autoencoder
         reconstructed = model(image)
 
         # Calculating the loss function
         loss = loss_function(reconstructed, image)
-        
+        avgLoss += loss
+        n += 1
         # The gradients are set to zero,
         # the gradient is computed and stored.
         # .step() performs parameter update
         optimizer.zero_grad()
         loss.backward()
         optimizer.step()
-        
+
         # Storing the losses in a list for plotting
         losses.append(loss.item())
     outputs.append((epochs, image, reconstructed))
+    print("\nepoch loss: ", (avgLoss.item()/n))
 
 plt.xlabel('Iterations')
 plt.ylabel('Loss')
