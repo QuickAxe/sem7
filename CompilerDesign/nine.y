@@ -31,12 +31,12 @@ extern FILE *yyin;
 
 %%
 
-S : IF '(' Cond ')' '{' Stmt '}'   {  $$="t"; Gen(temp2);sprintf(temp2,"\n%d]if not %s, jmp %d\n", lineNo++,$3, $6); Gen(temp2);printf("%s\n", temp2);   }
+S : IF '(' Cond ')' '{' Stmt '}'   {  $$="t"; Gen(temp2);sprintf(temp2,"\n%d]if not %s, jmp %d\n", lineNo++,$3, $6); Gen(temp2);printf("%s\n", temp2); exit(0);  }
 
 Cond : ID RELOP ID                 { sprintf($$, "%s %s %s", $1, $2, $3);}
 
 
-Stmt : Stmt Exp1                   { $$ = $2 + 1;}
+Stmt : Stmt Exp1 ';'               { $$ = $2 + 1;}
      |                             { }
 
 
