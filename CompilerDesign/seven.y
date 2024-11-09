@@ -27,7 +27,7 @@ yydebug = 0;
 %token IF ob1 cb1 ob2 cb2 EQ SC
 
 %%
-s	: IF ob1 COND cb1 ob2 stmt cb2	{ sprintf(temp2,"\nt%d=if(%s){%s}",tCount,$3,$6); sprintf($$, "t%d", tCount++ ); Gen(temp2);}
+s	: IF ob1 COND cb1 ob2 stmt cb2	{ sprintf(temp2,"\nt%d=if(%s){JMP %s}",tCount,$3,$6); sprintf($$, "t%d", tCount++ ); Gen(temp2);}
 
 
 stmt	:s						
@@ -66,5 +66,5 @@ int main( int argc, char **argv ) {
 	yyparse();
 	return 1;
 }
-// if(a == 2){ i = 3; }
+// if(i == 3){ m = 33; }
 //  printf("%s", temp2);
