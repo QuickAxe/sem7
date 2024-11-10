@@ -2,6 +2,7 @@
 //! Not sure if this is correct, but it works as "intended", for the most part
 #include<stdio.h>
 #include<string.h>
+#include<stdlib.h>
 
 int yylex(void);
 void yyerror(char*);
@@ -72,4 +73,4 @@ int main( int argc, char **argv ) {
 	return 1;
 }
 
-// if(i == m) { i = k + 4 }
+// if(m >= k) { x = k + 4; i = i + 1;}

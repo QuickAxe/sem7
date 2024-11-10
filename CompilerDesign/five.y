@@ -13,6 +13,7 @@
 
 
 S : ForLoop '{' Stmt ';' Stmt ';' Stmt ';' '}'                           {printf("\nValid For loop syntax\n\n");}
+   |WhileLoop '{' Stmt ';' Stmt ';' Stmt ';' '}'                         {printf("\nValid while loop syntax\n\n");}
 
 ForLoop : FOR '(' Itr ';' Cond ';' Inc ')'                               {}
 
@@ -62,3 +63,4 @@ int main(void)
     yyparse();
     return 0;
 }
+// while(i<=2){if(i>=2) i = i + 3;m = 33; y = y+4;}
